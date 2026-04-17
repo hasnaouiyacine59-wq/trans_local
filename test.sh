@@ -6,10 +6,7 @@ echo "Waiting for Tor to bootstrap..."
 until docker logs tor-gateway 2>&1 | grep -q "Bootstrapped 100%"; do sleep 2; done
 echo "Tor ready."
 
-echo "nameserver 127.0.0.1" > /tmp/resolv.conf
-docker run --rm \
-  --network container:tor-gateway \
-  -v /tmp/resolv.conf:/etc/resolv.conf \
-  curlimages/curl curl -s https://check.torproject.org/api/ip
+docker build -q -f Dockerfile.test -t camoufox-test .
+docker run --rm --network container:tor-gateway camoufox-test
 
 docker rm -f tor-gateway
