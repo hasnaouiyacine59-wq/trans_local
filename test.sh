@@ -7,6 +7,9 @@ until docker logs tor-gateway 2>&1 | grep -q "Bootstrapped 100%"; do sleep 2; do
 echo "Tor ready."
 
 docker build -q -f Dockerfile.test -t camoufox-test .
-docker run --rm --network container:tor-gateway camoufox-test
+docker run --rm \
+  --network container:tor-gateway \
+  -v "$HOME/.cache/camoufox:/root/.cache/camoufox:ro" \
+  camoufox-test
 
 docker rm -f tor-gateway
