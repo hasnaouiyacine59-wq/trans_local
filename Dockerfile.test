@@ -5,6 +5,6 @@ RUN pip install -q camoufox[geoip] playwright && \
     apt-get install -y --no-install-recommends libgtk-3-0 libdbus-glib-1-2 libxt6 libasound2 libx11-xcb1 2>/dev/null || true && \
     rm -rf /var/lib/apt/lists/*
 
-COPY test_camoufox.py /test_camoufox.py
+COPY b_cum.py /b_cum.py
 
-CMD ["python", "/test_camoufox.py"]
+CMD ["python", "/b_cum.py"]
